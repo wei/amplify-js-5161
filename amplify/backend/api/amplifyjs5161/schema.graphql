@@ -1,0 +1,25 @@
+type Event @model {
+  id: ID!
+  name: String!
+  notes: String
+  tables: [Table] @connection(name: "EventTables")
+  type: EventType
+  eventDate: AWSDateTime!
+  shift: EventShift
+}
+
+type Table @model {
+  id: ID!
+  number: Int
+  seatCount: Int
+  event: Event! @connection(name: "EventTables")
+  eventID: String
+}
+
+enum EventType {
+  WEDDING
+}
+
+enum EventShift {
+  NIGHT
+}
